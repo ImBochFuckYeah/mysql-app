@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-md">
-    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Iniciar sesión</h2>
 
     @if ($errors->has('login'))
     <div class="bg-red-100 text-red-700 p-3 rounded mb-4">

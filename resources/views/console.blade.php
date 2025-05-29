@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Consola SQL')
+@section('title', 'SQL Console')
 
 @section('content')
 <div class="max-w-4xl mx-auto bg-white p-8 rounded-2xl shadow-lg">
@@ -19,7 +19,8 @@
     </form>
 
     <div id="resultado"></div>
-
+</div>
+<div class="max-w-4xl mx-auto">
     <form action="{{ route('logout') }}" method="GET">
         <button type="submit"
             class="mt-3 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-200">
@@ -27,13 +28,12 @@
         </button>
     </form>
 </div>
-
 <script>
     document.getElementById('formulario').addEventListener('submit', function(e) {
         e.preventDefault();
         const query = document.getElementById('query').value;
         const resultadoDiv = document.getElementById('resultado');
-        resultadoDiv.innerHTML = "<p class='text-gray-500'>Ejecutando...</p>";
+        resultadoDiv.innerHTML = "<p class='text-gray-500 mt-4'>Ejecutando...</p>";
 
         fetch('/ejecutar', {
                 method: 'POST',
@@ -48,11 +48,11 @@
             .then(res => res.json())
             .then(data => {
                 if (data.error) {
-                    resultadoDiv.innerHTML = `<p class="text-red-600 font-medium">${data.error}</p>`;
+                    resultadoDiv.innerHTML = `<div class="bg-red-100 text-red-700 p-3 rounded mt-4">${data.error}</div>`;
                 } else if (data.data) {
                     // Si es un SELECT, mostrar tabla
                     if (data.data.length === 0) {
-                        resultadoDiv.innerHTML = `<p class="text-gray-600">Consulta ejecutada correctamente. No se encontraron resultados.</p>`;
+                        resultadoDiv.innerHTML = `<div class="bg-green-100 text-green-700 p-3 rounded mt-4">Consulta ejecutada correctamente. No se encontraron resultados.</div>`;
                         return;
                     }
 
@@ -73,11 +73,11 @@
                     html += '</tbody></table></div>';
                     resultadoDiv.innerHTML = html;
                 } else {
-                    resultadoDiv.innerHTML = `<p class="text-green-600">${data.message || 'Sentencia ejecutada.'}</p>`;
+                    resultadoDiv.innerHTML = `<div class="bg-green-100 text-green-700 p-3 rounded mt-4">${data.message || 'Sentencia ejecutada.'}</div>`;
                 }
             })
             .catch(err => {
-                resultadoDiv.innerHTML = `<p class="text-red-600">Error ejecutando la consulta.</p>`;
+                resultadoDiv.innerHTML = `<div class="bg-red-100 text-red-700 p-3 rounded mt-4">Error ejecutando la consulta.</div  >`;
                 console.error(err);
             });
     });

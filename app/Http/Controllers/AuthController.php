@@ -44,13 +44,13 @@ class AuthController extends Controller
     }
 
     public function register(Request $request)
-    {
-        $request->validate([
-            'username' => 'required|string|min:3|max:50',
-            'password' => 'required|string|min:5|confirmed',
-        ]);
-
+    {        
         try {
+            $request->validate([
+                'username' => 'required|string|min:3|max:50',
+                'password' => 'required|string|min:5|confirmed',
+            ]);
+            
             $username = $request->username;
             $password = $request->password;
 
