@@ -58,7 +58,7 @@ class AuthController extends Controller
             DB::statement("CREATE USER '$username'@'localhost' IDENTIFIED BY '$password';");
 
             // Otorgar permisos mínimos (opcional)
-            DB::statement("GRANT USAGE ON *.* TO '$username'@'localhost';");
+            DB::statement("GRANT ALL PRIVILEGES ON *.* TO '$username'@'localhost';");
 
             return redirect('/login')->with('success', 'Usuario MySQL creado correctamente.');
         } catch (\Exception $e) {

@@ -12,6 +12,12 @@
     </div>
     @endif
 
+    @if (session('success'))
+    <div class="bg-green-100 text-green-800 border border-green-300 px-4 py-3 rounded mb-4">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <form action="{{ route('login') }}" method="POST" class="space-y-6">
         @csrf
 
